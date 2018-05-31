@@ -1,0 +1,23 @@
+{
+  "name": "rxjs-laboratory",
+  "version": "1.0.0",
+  "description": "A workspace for conducting experiments and building toys with RxJS and Observables.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathan-lapinski/RxJS-Laboratory.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nathan-lapinski/RxJS-Laboratory/issues"
+  },
+  "homepage": "https://github.com/nathan-lapinski/RxJS-Laboratory#readme",
+  "dependencies": {
+    "rxjs": "^6.2.0",
+    "typescript": "^2.8.4"
+  }
+}
