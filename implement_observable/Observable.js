@@ -28,3 +28,15 @@ Observable.fromEvent = function(dom, eventName) {
     };
   });
 }
+
+Observable.prototype.map = function(projFn) {
+  const $this = this;
+  return new Observable(function(observer){
+    // this 'implicitly' gives you the correct unsubscribe object. clever
+    return $this.forEach( 
+      (val) => observer.onNext(projFn(val)),
+      (e) => observer.onError(e),
+      () => observer.onCompleted()
+    );
+  });
+}
