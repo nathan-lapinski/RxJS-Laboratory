@@ -40,3 +40,16 @@ Observable.prototype.map = function(projFn) {
     );
   });
 }
+
+Observable.prototype.filter = function(predicateFn) {
+  const $this = this;
+  return new Observable(function(observer){
+    return $this.forEach(
+      val => {
+        if (predicateFn(val)) observer.onNext(val);
+      },
+      (e) => observer.onError(e),
+      () => observer.onCompleted()
+    );
+  });
+}
