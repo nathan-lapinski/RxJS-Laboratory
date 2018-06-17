@@ -16,6 +16,23 @@ Observable.prototype = {
   } // end forEach
 };
 
+Observable.of = function(...args) {
+  return new Observable(observer => {
+    
+    args.forEach(val => {
+      observer.onNext(val);
+    });
+
+    observer.onCompleted();
+
+    return {
+      dispose: function() {
+        // TODO: anything to do here?
+      }
+    };
+  });
+}
+
 Observable.fromEvent = function(dom, eventName) {
   return new Observable(function(observer){
     const handler = (e) => observer.onNext(e);
@@ -53,3 +70,7 @@ Observable.prototype.filter = function(predicateFn) {
     );
   });
 }
+
+module.exports = {
+  Observable
+};
