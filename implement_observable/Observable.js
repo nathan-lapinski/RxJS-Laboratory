@@ -46,6 +46,13 @@ Observable.from = function(iterable) {
   });
 };
 
+Observable.just = function(value) {
+  return new Observable( observer => {
+    observer.onNext(value);
+    observer.onCompleted();
+  });
+}
+
 Observable.fromEvent = function(dom, eventName) {
   return new Observable(function(observer){
     const handler = (e) => observer.onNext(e);
