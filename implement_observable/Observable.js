@@ -33,6 +33,19 @@ Observable.of = function(...args) {
   });
 }
 
+// Takes in an object which implements the iterable interface
+Observable.from = function(iterable) {
+  return new Observable( observer => {
+    const iterator = iterable[Symbol.iterator]();
+
+    for (let val of iterator) {
+      observer.onNext(val);
+    }
+
+    observer.onCompleted();
+  });
+};
+
 Observable.fromEvent = function(dom, eventName) {
   return new Observable(function(observer){
     const handler = (e) => observer.onNext(e);
