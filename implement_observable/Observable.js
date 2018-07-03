@@ -71,6 +71,16 @@ Observable.throw = function() {
   });
 };
 
+Observable.repeat = function(value, times) {
+  return new Observable( observer => {
+    for (let i = 0; i < times; i++) {
+      observer.onNext(value);
+    }
+
+    observer.onCompleted();
+  });
+}
+
 Observable.fromEvent = function(dom, eventName) {
   return new Observable(function(observer){
     const handler = (e) => observer.onNext(e);

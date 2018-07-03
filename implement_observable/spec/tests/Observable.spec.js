@@ -105,4 +105,30 @@ describe('Observable', () => {
             expect(observer.onNext).not.toHaveBeenCalled();
         });
     });
+
+    describe('Observable.repeat', () => {
+        it('returns an Observable which emits a value a specified number of times', () => {
+            const value = 42;
+            const times = 3;
+            const obs = Observable.repeat(42, 3);
+
+            const onNext = () => {};
+            const onError = () => {};
+            const onCompleted = () => {};
+
+            const observer = {
+                onNext: onNext,
+                onError: onError,
+                onCompleted: onCompleted
+            };
+
+            spyOn(observer, 'onCompleted');
+            spyOn(observer, 'onNext');
+
+            obs.forEach(observer);
+            expect(observer.onCompleted).toHaveBeenCalled();
+            expect(observer.onNext).toHaveBeenCalledTimes(3);
+            expect(observer.onNext).toHaveBeenCalledWith(42);
+        });
+    });
 });
