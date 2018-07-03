@@ -51,7 +51,13 @@ Observable.just = function(value) {
     observer.onNext(value);
     observer.onCompleted();
   });
-}
+};
+
+Observable.empty = function() {
+  return new Observable( observer => {
+    observer.onCompleted();
+  });
+};
 
 Observable.fromEvent = function(dom, eventName) {
   return new Observable(function(observer){
