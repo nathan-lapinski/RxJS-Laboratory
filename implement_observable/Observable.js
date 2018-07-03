@@ -59,6 +59,18 @@ Observable.empty = function() {
   });
 };
 
+Observable.never = function() {
+  return new Observable( observer => {
+    // never do anything
+  });
+};
+
+Observable.throw = function() {
+  return new Observable( observer => {
+    observer.onError();
+  });
+};
+
 Observable.fromEvent = function(dom, eventName) {
   return new Observable(function(observer){
     const handler = (e) => observer.onNext(e);

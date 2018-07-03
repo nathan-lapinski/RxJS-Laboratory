@@ -34,7 +34,7 @@ describe('Observable', () => {
     });
 
     describe('Observable.empty', () => {
-        it('returns an observable which completed immediately', () => {
+        it('returns an observable which completes immediately', () => {
             const obs = Observable.empty();
 
             const onNext = () => {};
@@ -57,10 +57,52 @@ describe('Observable', () => {
     });
 
     describe('Observable.never', () => {
+        // TODO: This test doesn't really cover async scenarios.
+        // Would be nice to ensure that no values are ever emitted over a certain time interval
+        it('returns an observable which never completes or emits or errors', () => {
+            const obs = Observable.never();
 
+            const onNext = () => {};
+            const onError = () => {};
+            const onCompleted = () => {};
+
+            const observer = {
+                onNext: onNext,
+                onError: onError,
+                onCompleted: onCompleted
+            };
+
+            spyOn(observer, 'onCompleted');
+            spyOn(observer, 'onNext');
+            spyOn(observer, 'onError');
+
+            obs.forEach(observer);
+            expect(observer.onCompleted).not.toHaveBeenCalled();
+            expect(observer.onNext).not.toHaveBeenCalled();
+            expect(observer.onError).not.toHaveBeenCalled();
+        });
     });
 
     describe('Observable.throw', () => {
+        it('returns an observable which errors immediately', () => {
+            const obs = Observable.throw();
 
+            const onNext = () => {};
+            const onError = () => {};
+            const onCompleted = () => {};
+
+            const observer = {
+                onNext: onNext,
+                onError: onError,
+                onCompleted: onCompleted
+            };
+
+            spyOn(observer, 'onError');
+            spyOn(observer, 'onNext');
+
+            obs.forEach(observer);
+            expect(observer.onError).toHaveBeenCalled();
+            expect(observer.onNext).not.toHaveBeenCalled();
+        });
     });
 });
