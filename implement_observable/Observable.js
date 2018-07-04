@@ -1,3 +1,4 @@
+// simple Observable implementation
 function Observable(forEach) {
   this._forEach = forEach;
 }
